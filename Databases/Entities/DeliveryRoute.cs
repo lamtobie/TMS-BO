@@ -2,7 +2,7 @@ using Databases;
 
 namespace Databases.Entities
 {
-    public class DeliveryRoute
+    public class DeliveryRoute : AggregateRoot<int>
     {
         public int Id { get; set; }
         public string Status { get; set; }

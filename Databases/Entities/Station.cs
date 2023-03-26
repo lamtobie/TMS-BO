@@ -2,7 +2,7 @@
 
 namespace Databases.Entities
 {
-    public class Station 
+    public class Station : AggregateRoot<string>
     {
         public string Code { get; set; }
         public string Name { get; set; }

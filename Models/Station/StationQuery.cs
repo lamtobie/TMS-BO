@@ -1,0 +1,7 @@
+﻿using Services.Models.Base;
+
+namespace Services.Models.Station;
+
+public class StationQuery : QueryableModel
+{
+}

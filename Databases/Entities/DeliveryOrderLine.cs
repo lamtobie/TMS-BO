@@ -1,7 +1,7 @@
 
 namespace Databases.Entities
 {
-    public class DeliveryOrderLine 
+    public class DeliveryOrderLine : AggregateRoot<Guid>
     {
         public Guid Id { get; set; }
         public string DeliveryOrderCode { get; set; }

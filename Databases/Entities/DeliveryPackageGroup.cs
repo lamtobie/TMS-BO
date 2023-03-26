@@ -2,7 +2,7 @@ using Databases;
 
 namespace Databases.Entities
 {
-    public class DeliveryPackageGroup
+    public class DeliveryPackageGroup : AggregateRoot<string>
     {
         public string Code { get; set; }
         public string Status { get; set; }

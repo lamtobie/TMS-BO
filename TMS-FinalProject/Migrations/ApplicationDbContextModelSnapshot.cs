@@ -35,6 +35,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("code");
 
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("DataType")
                         .IsRequired()
                         .HasColumnType("text")
@@ -43,6 +49,9 @@ namespace TMS_FinalProject.Migrations
                     b.Property<string>("DataValue")
                         .HasColumnType("text")
                         .HasColumnName("data_value");
+
+                    b.Property<Guid>("Key")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Metadata")
                         .HasColumnType("jsonb")
@@ -60,6 +69,12 @@ namespace TMS_FinalProject.Migrations
                     b.Property<string>("NameVI")
                         .HasColumnType("text")
                         .HasColumnName("name_vi");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -108,6 +123,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("coordinator_code");
 
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<int?>("DeliveryRouteSegmentId")
                         .HasColumnType("integer")
                         .HasColumnName("delivery_route_segment_id");
@@ -155,6 +176,9 @@ namespace TMS_FinalProject.Migrations
                     b.Property<bool?>("IsToCustomer")
                         .HasColumnType("boolean")
                         .HasColumnName("is_to_customer");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
 
                     b.Property<string>("ParentCode")
                         .HasColumnType("text")
@@ -205,6 +229,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("threepl_team");
 
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<int?>("Weight")
                         .HasColumnType("integer")
                         .HasColumnName("weight");
@@ -229,6 +259,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("DeliveryOrderCode")
                         .IsRequired()
                         .HasColumnType("text")
@@ -242,6 +278,9 @@ namespace TMS_FinalProject.Migrations
                     b.Property<int?>("Height")
                         .HasColumnType("integer")
                         .HasColumnName("height");
+
+                    b.Property<Guid>("Key")
+                        .HasColumnType("uuid");
 
                     b.Property<int?>("Length")
                         .HasColumnType("integer")
@@ -257,6 +296,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("Draft")
                         .HasColumnName("status");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<int?>("Weight")
                         .HasColumnType("integer")
@@ -281,6 +326,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("code");
 
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("DeliveryPackageGroupCode")
                         .HasColumnType("text")
                         .HasColumnName("delivery_package_group_code");
@@ -288,6 +339,9 @@ namespace TMS_FinalProject.Migrations
                     b.Property<string>("ExternalCode")
                         .HasColumnType("text")
                         .HasColumnName("external_code");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
@@ -304,6 +358,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("uom");
 
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Code");
 
                     b.HasIndex("DeliveryPackageGroupCode");
@@ -317,10 +377,19 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("code");
 
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("DeliveryOrderCode")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("delivery_order_code");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
 
                     b.Property<string>("ParentCode")
                         .HasColumnType("text")
@@ -332,6 +401,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("Draft")
                         .HasColumnName("status");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Code");
 
@@ -363,6 +438,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("actual_time_consumed");
 
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("DriverCode")
                         .HasColumnType("text")
                         .HasColumnName("driver_code");
@@ -383,6 +464,9 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("expected_time_consumed");
 
+                    b.Property<int>("Key")
+                        .HasColumnType("integer");
+
                     b.Property<float?>("Length")
                         .HasColumnType("real")
                         .HasColumnName("length");
@@ -401,6 +485,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("Draft")
                         .HasColumnName("status");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -434,6 +524,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("actual_time_consumed");
 
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("DeliveryRouteId")
                         .HasColumnType("integer")
                         .HasColumnName("delivery_route_id");
@@ -458,6 +554,9 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("expected_time_consumed");
 
+                    b.Property<int>("Key")
+                        .HasColumnType("integer");
+
                     b.Property<float?>("Length")
                         .HasColumnType("real")
                         .HasColumnName("length");
@@ -476,6 +575,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("Draft")
                         .HasColumnName("status");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -503,6 +608,12 @@ namespace TMS_FinalProject.Migrations
                     b.Property<string>("AvatarPicture")
                         .HasColumnType("text")
                         .HasColumnName("avatar_picture");
+
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("DrivingLicensePicture")
                         .HasColumnType("text")
@@ -534,6 +645,9 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("is_station_admin");
 
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
+
                     b.Property<string>("MobilePhone")
                         .IsRequired()
                         .HasColumnType("text")
@@ -557,6 +671,12 @@ namespace TMS_FinalProject.Migrations
                     b.Property<string>("ThreePLTeam")
                         .HasColumnType("text")
                         .HasColumnName("threepl_team");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Code");
 
@@ -603,6 +723,15 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("contact_phone_another");
 
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
+
                     b.Property<decimal?>("Lat")
                         .HasColumnType("numeric")
                         .HasColumnName("lat");
@@ -622,6 +751,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("Draft")
                         .HasColumnName("status");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Code");
 

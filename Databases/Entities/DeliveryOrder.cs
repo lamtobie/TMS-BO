@@ -2,7 +2,7 @@ using Databases;
 
 namespace Databases.Entities
 {
-    public class DeliveryOrder 
+    public class DeliveryOrder : AggregateRoot<string>
     {
         public string Code { get; set; }
         public bool? IsToCustomer { get; set; }

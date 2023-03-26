@@ -1,7 +1,7 @@
 
 namespace Databases.Entities;
 
-public class DataAttribute
+public class DataAttribute:AggregateRoot<Guid>
 {
     public Guid Id { get; set; }
     public string Code { get; set; }

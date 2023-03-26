@@ -2,7 +2,7 @@
 
 namespace Databases.Entities
 {
-    public class Employee
+    public class Employee : AggregateRoot<string>
     {
         public string Code { get; set; }
         public string EmployeeType { get; set; }
