@@ -4,8 +4,6 @@ using System.Linq.Expressions;
 
 namespace Repositories
 {
- 
-
     public interface IRepository<TEntity, TKey>
         where TEntity : AggregateRoot<TKey>
     {

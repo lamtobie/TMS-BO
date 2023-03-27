@@ -19,6 +19,11 @@ namespace Databases.Persistence.Configurations
             builder.Property(e => e.DataType).HasColumnName("data_type");
             builder.Property(e => e.DataValue).HasColumnName("data_value");
             builder.Property(e => e.Metadata).HasColumnName("metadata").HasColumnType("jsonb");
+            builder.Property(e => e.CreatedAt).HasColumnName("created_at");
+            builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+            builder.Property(e => e.CreatedBy).HasColumnName("created_by");
+            builder.Property(e => e.UpdatedBy).HasColumnName("updated_by");
+            builder.Ignore(e => e.Key);
         }
     }
 }

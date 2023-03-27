@@ -1,5 +1,4 @@
-﻿using Databases;
-
+﻿
 namespace Databases.Entities
 {
     public class Employee : AggregateRoot<string>
@@ -13,16 +12,19 @@ namespace Databases.Entities
         public string? IdentityNumber { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
-        public string? Address { get; set; }
+        public Guid? AddressId { get; set; }
         public string? ThreePLTeam { get; set; }
         public string? AvatarPicture { get; set; }
         public string? DrivingLicensePicture { get; set; }
         public string? IdentityNumberPicture { get; set; }
         public string Status { get; set; } = "Active";
 
+        public virtual Address? Address { get; set; }
         public virtual Station Station { get; set; }
         public virtual ICollection<DeliveryOrder> DeliveryOrders { get; set; }
         public virtual ICollection<DeliveryRoute> DeliveryRoutes { get; set; }
         public virtual ICollection<DeliveryRouteSegment> DeliveryRouteSegments { get; set; }
+        public virtual ICollection<DeliverySession> DriverDeliverySessions { get; set; }
+        public virtual ICollection<DeliverySession> CoordinatorDeliverySessions { get; set; }
     }
 }

@@ -1,13 +1,15 @@
-﻿using Services.Models.Pagination;
+﻿using Services.Models.Base;
 
 namespace Services.Models.DeliveryOrder;
 
-public class DeliveryOrderQuery : PaginationQuery
+public class DeliveryOrderQuery : QueryableModel
 {
-    public string? Keyword { get; set; }
     public string? ThreePLTeam { get; set; }
-    public string? ClientMobilePhone { get; set; }
-    public string? CreatedAt { get; set; }
-    public string? ConsumedAt { get; set; }
-    public string? Status { get; set; }
+    public string? DriverCode { get; set; }
+    public string? CoordinatorCode { get; set; }
+    public string? ExpectedArrivalTime { get; set; }
+    public string? ActualTimeConsumed { get; set; }
+    public string? StartStation { get; set; }
+    public string? SourceBy { get; set; }
+    public string? NumberOfRoute { get; set; }
 }

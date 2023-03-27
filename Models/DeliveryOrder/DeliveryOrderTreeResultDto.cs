@@ -1,3 +1,5 @@
+using Services.Models.Address;
+using Services.Models.DeliveryOrderLine;
 using Services.Models.Employee;
 
 namespace Services.Models.DeliveryOrder;
@@ -6,8 +8,8 @@ public class DeliveryOrderTreeResultDto
 {
     public string? Code { get; set; }
     public string? Status { get; set; }
-    public int? TotalItems { get; set; }
-    public int? TotalStations { get; set; }
+    public float? TotalItems { get; set; }
+    public int? NumberOfTransit { get; set; }
     public string? GroupCode { get; set; }
     public string? ParentCode { get; set; }
     public string? DriverCode { get; set; }
@@ -24,11 +26,11 @@ public class DeliveryOrderTreeResultDto
     public string? ThreePLTeam { get; set; }
     // public float? Amount { get; set; }
     public float? CodAmount { get; set; }
-    public string? StartAddress { get; set; }
+    public AddressDto? StartAddress { get; set; }
     // public string? StartContactPerson { get; set; }
     // public string? StartContactPhone { get; set; }
     // public string? StartNote { get; set; }
-    // public string? EndAddress { get; set; }
+    // public AddressDto? EndAddress { get; set; }
     // public string? EndContactPerson { get; set; }
     // public string? EndContactPhone { get; set; }
     // public string? EndNote { get; set; }
@@ -37,7 +39,7 @@ public class DeliveryOrderTreeResultDto
     // public long? CreatedBy { get; set; } = 0;
     // public long? UpdatedBy { get; set; }
 
-    public List<DeliveryOrderTreeResultDto>? Children { get; set; } = new List<DeliveryOrderTreeResultDto>();
+    public List<DeliveryOrderTreeResultDto>? Children { get; set; }
     public EmployeeDto? Driver { get; set; }
     public EmployeeDto? Coordinator { get; set; }
     // public EmployeeDto? Session { get; set; }

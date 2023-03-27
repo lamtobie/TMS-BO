@@ -20,6 +20,11 @@ namespace Databases.Persistence.Configurations
             builder.Property(e => e.Length).HasColumnName("length");
             builder.Property(e => e.Width).HasColumnName("width");
             builder.Property(e => e.Height).HasColumnName("height");
+            builder.Property(e => e.CreatedAt).HasColumnName("created_at");
+            builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+            builder.Property(e => e.CreatedBy).HasColumnName("created_by");
+            builder.Property(e => e.UpdatedBy).HasColumnName("updated_by");
+            builder.Ignore(e => e.Key);
 
             builder.HasOne(e => e.DeliveryOrder).WithMany(d => d.DeliveryOrderLines).HasForeignKey(e => e.DeliveryOrderCode);
             builder.HasOne(e => e.DeliveryPackage).WithMany(d => d.DeliveryOrderLines).HasForeignKey(e => e.DeliveryPackageCode);

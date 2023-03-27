@@ -3,18 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS-FinalProject", "TMS-FinalProject\TMS-FinalProject.csproj", "{13E9CB52-36DB-42E5-B633-1AFE58BB2D6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS-FinalProject", "TMS-FinalProject\TMS-FinalProject.csproj", "{13E9CB52-36DB-42E5-B633-1AFE58BB2D6F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4543DF2E-BD29-4B1F-AE42-8036C5F695C2} = {4543DF2E-BD29-4B1F-AE42-8036C5F695C2}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Databases", "Databases\Databases.csproj", "{4543DF2E-BD29-4B1F-AE42-8036C5F695C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Databases", "Databases\Databases.csproj", "{4543DF2E-BD29-4B1F-AE42-8036C5F695C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Models", "Models\Services.Models.csproj", "{F75F38D7-51C8-4540-A416-9F807EEE1227}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Models", "Models\Services.Models.csproj", "{F75F38D7-51C8-4540-A416-9F807EEE1227}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4543DF2E-BD29-4B1F-AE42-8036C5F695C2} = {4543DF2E-BD29-4B1F-AE42-8036C5F695C2}
+		{6D9211C2-CDE2-4DC4-BA56-1936A76E8181} = {6D9211C2-CDE2-4DC4-BA56-1936A76E8181}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Helper", "Services.Helper\Services.Helper.csproj", "{6D9211C2-CDE2-4DC4-BA56-1936A76E8181}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Helper", "Services.Helper\Services.Helper.csproj", "{6D9211C2-CDE2-4DC4-BA56-1936A76E8181}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{366244B0-99D0-42E6-A043-CB1234C60393}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{366244B0-99D0-42E6-A043-CB1234C60393}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4543DF2E-BD29-4B1F-AE42-8036C5F695C2} = {4543DF2E-BD29-4B1F-AE42-8036C5F695C2}
 		{6D9211C2-CDE2-4DC4-BA56-1936A76E8181} = {6D9211C2-CDE2-4DC4-BA56-1936A76E8181}

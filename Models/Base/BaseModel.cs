@@ -11,13 +11,10 @@ namespace Services.Models.Base
             ErrorMessage = null;
         }
 
-        [JsonPropertyName("success")]
         public bool Success { get; set; }
         
-        [JsonPropertyName("r_code")]
         public string ErrorCode { get; set; }
 
-        [JsonPropertyName("r_message")]
         public string ErrorMessage { get; set; }
 
         [JsonIgnore]

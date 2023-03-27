@@ -23,6 +23,98 @@ namespace TMS_FinalProject.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Databases.Entities.Address", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("BlockAddress")
+                        .HasColumnType("text")
+                        .HasColumnName("block_address");
+
+                    b.Property<string>("ClusterAddress")
+                        .HasColumnType("text")
+                        .HasColumnName("cluster_address");
+
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
+
+                    b.Property<decimal>("Lat")
+                        .HasColumnType("numeric")
+                        .HasColumnName("lat");
+
+                    b.Property<decimal>("Long")
+                        .HasColumnType("numeric")
+                        .HasColumnName("long");
+
+                    b.Property<string>("QuarterAddress")
+                        .HasColumnType("text")
+                        .HasColumnName("quarter_address");
+
+                    b.Property<string>("SlicCode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("slic_code");
+
+                    b.Property<string>("SlicDistrict")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("slic_district");
+
+                    b.Property<string>("SlicLabel")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("slic_label");
+
+                    b.Property<string>("SlicLevel")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("slic_level");
+
+                    b.Property<string>("SlicProvince")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("slic_province");
+
+                    b.Property<string>("SlicRegion")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("slic_region");
+
+                    b.Property<string>("SlicWard")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("slic_ward");
+
+                    b.Property<string>("SubQuarterAddress")
+                        .HasColumnType("text")
+                        .HasColumnName("sub_quarter_address");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("text");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("address", (string)null);
+                });
+
             modelBuilder.Entity("Databases.Entities.DataAttribute", b =>
                 {
                     b.Property<Guid>("Id")
@@ -36,10 +128,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("code");
 
                     b.Property<long>("CreatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
 
                     b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
 
                     b.Property<string>("DataType")
                         .IsRequired()
@@ -49,9 +143,6 @@ namespace TMS_FinalProject.Migrations
                     b.Property<string>("DataValue")
                         .HasColumnType("text")
                         .HasColumnName("data_value");
-
-                    b.Property<Guid>("Key")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("Metadata")
                         .HasColumnType("jsonb")
@@ -71,10 +162,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("name_vi");
 
                     b.Property<long?>("UpdatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
 
                     b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
 
                     b.HasKey("Id");
 
@@ -103,9 +196,9 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("jsonb")
                         .HasColumnName("additional");
 
-                    b.Property<float?>("Amount")
-                        .HasColumnType("real")
-                        .HasColumnName("amount");
+                    b.Property<bool?>("CODReceived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("cod_received");
 
                     b.Property<bool?>("CodAllowed")
                         .HasColumnType("boolean")
@@ -124,10 +217,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("coordinator_code");
 
                     b.Property<long>("CreatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
 
                     b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
 
                     b.Property<int?>("DeliveryRouteSegmentId")
                         .HasColumnType("integer")
@@ -141,9 +236,9 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("email");
 
-                    b.Property<string>("EndAddress")
-                        .HasColumnType("text")
-                        .HasColumnName("end_address");
+                    b.Property<Guid?>("EndAddressId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("end_address_id");
 
                     b.Property<string>("EndContactPerson")
                         .HasColumnType("text")
@@ -156,6 +251,14 @@ namespace TMS_FinalProject.Migrations
                     b.Property<string>("EndNote")
                         .HasColumnType("text")
                         .HasColumnName("end_note");
+
+                    b.Property<string>("EndStationCode")
+                        .HasColumnType("text")
+                        .HasColumnName("end_station_code");
+
+                    b.Property<string>("Evidence")
+                        .HasColumnType("text")
+                        .HasColumnName("evidence");
 
                     b.Property<long?>("ExpectedArrivalTime")
                         .HasColumnType("bigint")
@@ -177,8 +280,13 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("is_to_customer");
 
-                    b.Property<string>("Key")
-                        .HasColumnType("text");
+                    b.Property<string>("Note")
+                        .HasColumnType("text")
+                        .HasColumnName("note");
+
+                    b.Property<int?>("NumberOfTransit")
+                        .HasColumnType("integer")
+                        .HasColumnName("number_of_transit");
 
                     b.Property<string>("ParentCode")
                         .HasColumnType("text")
@@ -188,9 +296,17 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("product_type");
 
+                    b.Property<string>("Reason")
+                        .HasColumnType("text")
+                        .HasColumnName("reason");
+
                     b.Property<string>("ReferenceCode")
                         .HasColumnType("text")
                         .HasColumnName("reference_code");
+
+                    b.Property<string>("ReturnAddress")
+                        .HasColumnType("text")
+                        .HasColumnName("return_address");
 
                     b.Property<string>("SessionCode")
                         .HasColumnType("text")
@@ -199,12 +315,12 @@ namespace TMS_FinalProject.Migrations
                     b.Property<string>("SourceBy")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("text")
-                        .HasDefaultValue("TMS")
+                        .HasDefaultValue("TMS Client")
                         .HasColumnName("source_by");
 
-                    b.Property<string>("StartAddress")
-                        .HasColumnType("text")
-                        .HasColumnName("start_address");
+                    b.Property<Guid?>("StartAddressId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("start_address_id");
 
                     b.Property<string>("StartContactPerson")
                         .HasColumnType("text")
@@ -218,6 +334,10 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("start_note");
 
+                    b.Property<string>("StartStationCode")
+                        .HasColumnType("text")
+                        .HasColumnName("start_station_code");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
@@ -229,11 +349,21 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("threepl_team");
 
+                    b.Property<float?>("TotalItems")
+                        .HasColumnType("real")
+                        .HasColumnName("total_items");
+
+                    b.Property<int?>("TransitOrder")
+                        .HasColumnType("integer")
+                        .HasColumnName("transit_order");
+
                     b.Property<long?>("UpdatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
 
                     b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
 
                     b.Property<int?>("Weight")
                         .HasColumnType("integer")
@@ -243,13 +373,55 @@ namespace TMS_FinalProject.Migrations
 
                     b.HasIndex("CoordinatorCode");
 
-                    b.HasIndex("DeliveryRouteSegmentId");
-
                     b.HasIndex("DriverCode");
+
+                    b.HasIndex("EndAddressId");
+
+                    b.HasIndex("GroupCode");
 
                     b.HasIndex("ParentCode");
 
+                    b.HasIndex("SessionCode");
+
+                    b.HasIndex("StartAddressId");
+
                     b.ToTable("delivery_order", (string)null);
+                });
+
+            modelBuilder.Entity("Databases.Entities.DeliveryOrderGroup", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("text")
+                        .HasColumnName("code");
+
+                    b.Property<string>("CancelReason")
+                        .HasColumnType("text")
+                        .HasColumnName("cancel_reason");
+
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("status");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
+
+                    b.HasKey("Code");
+
+                    b.ToTable("delivery_order_group", (string)null);
                 });
 
             modelBuilder.Entity("Databases.Entities.DeliveryOrderLine", b =>
@@ -260,10 +432,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("id");
 
                     b.Property<long>("CreatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
 
                     b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
 
                     b.Property<string>("DeliveryOrderCode")
                         .IsRequired()
@@ -278,9 +452,6 @@ namespace TMS_FinalProject.Migrations
                     b.Property<int?>("Height")
                         .HasColumnType("integer")
                         .HasColumnName("height");
-
-                    b.Property<Guid>("Key")
-                        .HasColumnType("uuid");
 
                     b.Property<int?>("Length")
                         .HasColumnType("integer")
@@ -298,10 +469,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("status");
 
                     b.Property<long?>("UpdatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
 
                     b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
 
                     b.Property<int?>("Weight")
                         .HasColumnType("integer")
@@ -327,21 +500,23 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("code");
 
                     b.Property<long>("CreatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
 
                     b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
 
                     b.Property<string>("DeliveryPackageGroupCode")
-                        .HasColumnType("text")
-                        .HasColumnName("delivery_package_group_code");
+                        .HasColumnType("text");
 
                     b.Property<string>("ExternalCode")
                         .HasColumnType("text")
                         .HasColumnName("external_code");
 
-                    b.Property<string>("Key")
-                        .HasColumnType("text");
+                    b.Property<string>("ExternalSOCode")
+                        .HasColumnType("text")
+                        .HasColumnName("external_so_code");
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
@@ -359,10 +534,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("uom");
 
                     b.Property<long?>("UpdatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
 
                     b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
 
                     b.HasKey("Code");
 
@@ -378,18 +555,16 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("code");
 
                     b.Property<long>("CreatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
 
                     b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
 
                     b.Property<string>("DeliveryOrderCode")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("delivery_order_code");
-
-                    b.Property<string>("Key")
-                        .HasColumnType("text");
 
                     b.Property<string>("ParentCode")
                         .HasColumnType("text")
@@ -403,10 +578,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("status");
 
                     b.Property<long?>("UpdatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
 
                     b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
 
                     b.HasKey("Code");
 
@@ -439,10 +616,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("actual_time_consumed");
 
                     b.Property<long>("CreatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
 
                     b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
 
                     b.Property<string>("DriverCode")
                         .HasColumnType("text")
@@ -464,9 +643,6 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("expected_time_consumed");
 
-                    b.Property<int>("Key")
-                        .HasColumnType("integer");
-
                     b.Property<float?>("Length")
                         .HasColumnType("real")
                         .HasColumnName("length");
@@ -487,10 +663,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("status");
 
                     b.Property<long?>("UpdatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
 
                     b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
 
                     b.HasKey("Id");
 
@@ -525,10 +703,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("actual_time_consumed");
 
                     b.Property<long>("CreatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
 
                     b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
 
                     b.Property<int>("DeliveryRouteId")
                         .HasColumnType("integer")
@@ -554,9 +734,6 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("expected_time_consumed");
 
-                    b.Property<int>("Key")
-                        .HasColumnType("integer");
-
                     b.Property<float?>("Length")
                         .HasColumnType("real")
                         .HasColumnName("length");
@@ -577,10 +754,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("status");
 
                     b.Property<long?>("UpdatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
 
                     b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
 
                     b.HasKey("Id");
 
@@ -595,25 +774,244 @@ namespace TMS_FinalProject.Migrations
                     b.ToTable("delivery_route_segment", (string)null);
                 });
 
+            modelBuilder.Entity("Databases.Entities.DeliverySession", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("text")
+                        .HasColumnName("code");
+
+                    b.Property<string>("CoordinatorCode")
+                        .HasColumnType("text")
+                        .HasColumnName("coordinator_code");
+
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
+
+                    b.Property<string>("DriverCode")
+                        .HasColumnType("text")
+                        .HasColumnName("driver_code");
+
+                    b.Property<string>("EndStationCode")
+                        .HasColumnType("text")
+                        .HasColumnName("end_station_code");
+
+                    b.Property<string>("Evidence")
+                        .HasColumnType("text")
+                        .HasColumnName("evidence");
+
+                    b.Property<string>("Excepted")
+                        .HasColumnType("text")
+                        .HasColumnName("excepted");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("text")
+                        .HasColumnName("note");
+
+                    b.Property<string>("ParentCode")
+                        .HasColumnType("text")
+                        .HasColumnName("parent_code");
+
+                    b.Property<string>("ReasonCancel")
+                        .HasColumnType("text")
+                        .HasColumnName("reason_cancel");
+
+                    b.Property<string>("ReasonReject")
+                        .HasColumnType("text")
+                        .HasColumnName("reason_reject");
+
+                    b.Property<string>("SessionGroupCode")
+                        .HasColumnType("text")
+                        .HasColumnName("session_group_code");
+
+                    b.Property<string>("SessionType")
+                        .HasColumnType("text")
+                        .HasColumnName("session_type");
+
+                    b.Property<string>("StartStationCode")
+                        .HasColumnType("text")
+                        .HasColumnName("start_station_code");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Draft")
+                        .HasColumnName("status");
+
+                    b.Property<bool?>("ToCustomer")
+                        .HasColumnType("boolean")
+                        .HasColumnName("to_customer");
+
+                    b.Property<int?>("TotalReceivedItems")
+                        .HasColumnType("integer")
+                        .HasColumnName("total_received_items");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
+
+                    b.Property<string>("VehicleCode")
+                        .HasColumnType("text")
+                        .HasColumnName("vehicle_code");
+
+                    b.HasKey("Code");
+
+                    b.HasIndex("CoordinatorCode");
+
+                    b.HasIndex("DriverCode");
+
+                    b.HasIndex("EndStationCode");
+
+                    b.HasIndex("ParentCode");
+
+                    b.HasIndex("SessionGroupCode");
+
+                    b.HasIndex("StartStationCode");
+
+                    b.HasIndex("VehicleCode");
+
+                    b.ToTable("delivery_session", (string)null);
+                });
+
+            modelBuilder.Entity("Databases.Entities.DeliverySessionGroup", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("text")
+                        .HasColumnName("code");
+
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
+
+                    b.HasKey("Code");
+
+                    b.ToTable("delivery_session_group", (string)null);
+                });
+
+            modelBuilder.Entity("Databases.Entities.DeliverySessionLine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("code");
+
+                    b.Property<long?>("ConsumedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("consumed_at");
+
+                    b.Property<string>("ConsumedBy")
+                        .HasColumnType("text")
+                        .HasColumnName("consumed_by");
+
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
+
+                    b.Property<string>("DeliveryOrderChildrenCode")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DeliveryOrderCode")
+                        .HasColumnType("text")
+                        .HasColumnName("delivery_order_code");
+
+                    b.Property<string>("DeliveryOrderGroupCode")
+                        .HasColumnType("text")
+                        .HasColumnName("delivery_order_group_code");
+
+                    b.Property<string>("DeliveryOrderParentCode")
+                        .HasColumnType("text")
+                        .HasColumnName("delivery_order_parent_code");
+
+                    b.Property<string>("DeliveryPackageCode")
+                        .HasColumnType("text")
+                        .HasColumnName("delivery_package_code");
+
+                    b.Property<string>("DeliveryPackageGroupCode")
+                        .HasColumnType("text")
+                        .HasColumnName("delivery_package_group_code");
+
+                    b.Property<string>("DeliverySessionCode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("delivery_session_code");
+
+                    b.Property<string>("ReferenceCode")
+                        .HasColumnType("text")
+                        .HasColumnName("reference_code");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Draft")
+                        .HasColumnName("status");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliverySessionCode");
+
+                    b.ToTable("delivery_session_line", (string)null);
+                });
+
             modelBuilder.Entity("Databases.Entities.Employee", b =>
                 {
                     b.Property<string>("Code")
                         .HasColumnType("text")
                         .HasColumnName("code");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("text")
-                        .HasColumnName("address");
+                    b.Property<Guid?>("AddressId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("address_id");
 
                     b.Property<string>("AvatarPicture")
                         .HasColumnType("text")
                         .HasColumnName("avatar_picture");
 
                     b.Property<long>("CreatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
 
                     b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
 
                     b.Property<string>("DrivingLicensePicture")
                         .HasColumnType("text")
@@ -645,9 +1043,6 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("is_station_admin");
 
-                    b.Property<string>("Key")
-                        .HasColumnType("text");
-
                     b.Property<string>("MobilePhone")
                         .IsRequired()
                         .HasColumnType("text")
@@ -673,12 +1068,16 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("threepl_team");
 
                     b.Property<long?>("UpdatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
 
                     b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
 
                     b.HasKey("Code");
+
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("StationCode");
 
@@ -691,10 +1090,9 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnType("text")
                         .HasColumnName("code");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("address");
+                    b.Property<Guid?>("AddressId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("address_id");
 
                     b.Property<string>("ContactEmail")
                         .IsRequired()
@@ -724,21 +1122,12 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("contact_phone_another");
 
                     b.Property<long>("CreatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
 
                     b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Key")
-                        .HasColumnType("text");
-
-                    b.Property<decimal?>("Lat")
-                        .HasColumnType("numeric")
-                        .HasColumnName("lat");
-
-                    b.Property<decimal?>("Long")
-                        .HasColumnType("numeric")
-                        .HasColumnName("long");
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -753,14 +1142,123 @@ namespace TMS_FinalProject.Migrations
                         .HasColumnName("status");
 
                     b.Property<long?>("UpdatedAt")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
 
                     b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
 
                     b.HasKey("Code");
 
+                    b.HasIndex("AddressId");
+
                     b.ToTable("station", (string)null);
+                });
+
+            modelBuilder.Entity("Databases.Entities.Vehicle", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("text")
+                        .HasColumnName("code");
+
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
+
+                    b.Property<string>("NumberPlate")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("number_plate");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("free")
+                        .HasColumnName("status");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
+
+                    b.Property<string>("VehicleTypeCode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("vehicle_type_code");
+
+                    b.HasKey("Code");
+
+                    b.HasIndex("VehicleTypeCode");
+
+                    b.ToTable("vehicle", (string)null);
+                });
+
+            modelBuilder.Entity("Databases.Entities.VehicleType", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("text")
+                        .HasColumnName("code");
+
+                    b.Property<long>("CreatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_at");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by");
+
+                    b.Property<float?>("Height")
+                        .HasColumnType("real")
+                        .HasColumnName("height");
+
+                    b.Property<float?>("Length")
+                        .HasColumnType("real")
+                        .HasColumnName("length");
+
+                    b.Property<float?>("MaximumCapacity")
+                        .HasColumnType("real")
+                        .HasColumnName("maximum_capacity");
+
+                    b.Property<float?>("MaximumPayload")
+                        .HasColumnType("real")
+                        .HasColumnName("maximum_payload");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Active")
+                        .HasColumnName("status");
+
+                    b.Property<long?>("UpdatedAt")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_at");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by");
+
+                    b.Property<float?>("Width")
+                        .HasColumnType("real")
+                        .HasColumnName("width");
+
+                    b.HasKey("Code");
+
+                    b.ToTable("vehicle_type", (string)null);
                 });
 
             modelBuilder.Entity("Databases.Entities.DeliveryOrder", b =>
@@ -769,13 +1267,17 @@ namespace TMS_FinalProject.Migrations
                         .WithMany()
                         .HasForeignKey("CoordinatorCode");
 
-                    b.HasOne("Databases.Entities.DeliveryRouteSegment", "DeliveryRouteSegment")
-                        .WithMany()
-                        .HasForeignKey("DeliveryRouteSegmentId");
-
                     b.HasOne("Databases.Entities.Employee", "Driver")
                         .WithMany("DeliveryOrders")
                         .HasForeignKey("DriverCode");
+
+                    b.HasOne("Databases.Entities.Address", "EndAddress")
+                        .WithMany("DeliveryOrderEndAddress")
+                        .HasForeignKey("EndAddressId");
+
+                    b.HasOne("Databases.Entities.DeliveryOrderGroup", "DeliveryOrderGroup")
+                        .WithMany("DeliveryOrders")
+                        .HasForeignKey("GroupCode");
 
                     b.HasOne("Databases.Entities.DeliveryOrder", "Parent")
                         .WithMany("Childrens")
@@ -783,13 +1285,27 @@ namespace TMS_FinalProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Databases.Entities.DeliverySession", "Session")
+                        .WithMany("DeliveryOrders")
+                        .HasForeignKey("SessionCode");
+
+                    b.HasOne("Databases.Entities.Address", "StartAddress")
+                        .WithMany("DeliveryOrderStartAddress")
+                        .HasForeignKey("StartAddressId");
+
                     b.Navigation("Coordinator");
 
-                    b.Navigation("DeliveryRouteSegment");
+                    b.Navigation("DeliveryOrderGroup");
 
                     b.Navigation("Driver");
 
+                    b.Navigation("EndAddress");
+
                     b.Navigation("Parent");
+
+                    b.Navigation("Session");
+
+                    b.Navigation("StartAddress");
                 });
 
             modelBuilder.Entity("Databases.Entities.DeliveryOrderLine", b =>
@@ -813,20 +1329,16 @@ namespace TMS_FinalProject.Migrations
 
             modelBuilder.Entity("Databases.Entities.DeliveryPackage", b =>
                 {
-                    b.HasOne("Databases.Entities.DeliveryPackageGroup", "DeliveryPackageGroup")
+                    b.HasOne("Databases.Entities.DeliveryPackageGroup", null)
                         .WithMany("DeliveryPackages")
                         .HasForeignKey("DeliveryPackageGroupCode");
-
-                    b.Navigation("DeliveryPackageGroup");
                 });
 
             modelBuilder.Entity("Databases.Entities.DeliveryPackageGroup", b =>
                 {
                     b.HasOne("Databases.Entities.DeliveryOrder", "DeliveryOrder")
-                        .WithMany("DeliveryPackageGroups")
-                        .HasForeignKey("DeliveryOrderCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("DeliveryOrderCode");
 
                     b.HasOne("Databases.Entities.DeliveryPackageGroup", "Parent")
                         .WithMany("Childrens")
@@ -889,13 +1401,108 @@ namespace TMS_FinalProject.Migrations
                     b.Navigation("StartStation");
                 });
 
+            modelBuilder.Entity("Databases.Entities.DeliverySession", b =>
+                {
+                    b.HasOne("Databases.Entities.Employee", "Coordinator")
+                        .WithMany("CoordinatorDeliverySessions")
+                        .HasForeignKey("CoordinatorCode");
+
+                    b.HasOne("Databases.Entities.Employee", "Driver")
+                        .WithMany("DriverDeliverySessions")
+                        .HasForeignKey("DriverCode");
+
+                    b.HasOne("Databases.Entities.Station", "EndStation")
+                        .WithMany("EndDeliverySessions")
+                        .HasForeignKey("EndStationCode");
+
+                    b.HasOne("Databases.Entities.DeliverySession", "Parent")
+                        .WithMany("Childrens")
+                        .HasForeignKey("ParentCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Databases.Entities.DeliverySessionGroup", "SessionGroup")
+                        .WithMany("Sessions")
+                        .HasForeignKey("SessionGroupCode");
+
+                    b.HasOne("Databases.Entities.Station", "StartStation")
+                        .WithMany("StartDeliverySessions")
+                        .HasForeignKey("StartStationCode");
+
+                    b.HasOne("Databases.Entities.Vehicle", "Vehicle")
+                        .WithMany("DeliverySessions")
+                        .HasForeignKey("VehicleCode");
+
+                    b.Navigation("Coordinator");
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("EndStation");
+
+                    b.Navigation("Parent");
+
+                    b.Navigation("SessionGroup");
+
+                    b.Navigation("StartStation");
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("Databases.Entities.DeliverySessionLine", b =>
+                {
+                    b.HasOne("Databases.Entities.DeliverySession", "DeliverySession")
+                        .WithMany("DeliverySessionLines")
+                        .HasForeignKey("DeliverySessionCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DeliverySession");
+                });
+
             modelBuilder.Entity("Databases.Entities.Employee", b =>
                 {
+                    b.HasOne("Databases.Entities.Address", "Address")
+                        .WithMany("Employees")
+                        .HasForeignKey("AddressId");
+
                     b.HasOne("Databases.Entities.Station", "Station")
                         .WithMany("Employees")
                         .HasForeignKey("StationCode");
 
+                    b.Navigation("Address");
+
                     b.Navigation("Station");
+                });
+
+            modelBuilder.Entity("Databases.Entities.Station", b =>
+                {
+                    b.HasOne("Databases.Entities.Address", "Address")
+                        .WithMany("Stations")
+                        .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("Databases.Entities.Vehicle", b =>
+                {
+                    b.HasOne("Databases.Entities.VehicleType", "VehicleType")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("VehicleTypeCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VehicleType");
+                });
+
+            modelBuilder.Entity("Databases.Entities.Address", b =>
+                {
+                    b.Navigation("DeliveryOrderEndAddress");
+
+                    b.Navigation("DeliveryOrderStartAddress");
+
+                    b.Navigation("Employees");
+
+                    b.Navigation("Stations");
                 });
 
             modelBuilder.Entity("Databases.Entities.DeliveryOrder", b =>
@@ -903,8 +1510,11 @@ namespace TMS_FinalProject.Migrations
                     b.Navigation("Childrens");
 
                     b.Navigation("DeliveryOrderLines");
+                });
 
-                    b.Navigation("DeliveryPackageGroups");
+            modelBuilder.Entity("Databases.Entities.DeliveryOrderGroup", b =>
+                {
+                    b.Navigation("DeliveryOrders");
                 });
 
             modelBuilder.Entity("Databases.Entities.DeliveryPackage", b =>
@@ -924,13 +1534,31 @@ namespace TMS_FinalProject.Migrations
                     b.Navigation("DeliveryRouteSegments");
                 });
 
+            modelBuilder.Entity("Databases.Entities.DeliverySession", b =>
+                {
+                    b.Navigation("Childrens");
+
+                    b.Navigation("DeliveryOrders");
+
+                    b.Navigation("DeliverySessionLines");
+                });
+
+            modelBuilder.Entity("Databases.Entities.DeliverySessionGroup", b =>
+                {
+                    b.Navigation("Sessions");
+                });
+
             modelBuilder.Entity("Databases.Entities.Employee", b =>
                 {
+                    b.Navigation("CoordinatorDeliverySessions");
+
                     b.Navigation("DeliveryOrders");
 
                     b.Navigation("DeliveryRouteSegments");
 
                     b.Navigation("DeliveryRoutes");
+
+                    b.Navigation("DriverDeliverySessions");
                 });
 
             modelBuilder.Entity("Databases.Entities.Station", b =>
@@ -941,9 +1569,23 @@ namespace TMS_FinalProject.Migrations
 
                     b.Navigation("EndDeliveryRoutes");
 
+                    b.Navigation("EndDeliverySessions");
+
                     b.Navigation("StartDeliveryRouteSegments");
 
                     b.Navigation("StartDeliveryRoutes");
+
+                    b.Navigation("StartDeliverySessions");
+                });
+
+            modelBuilder.Entity("Databases.Entities.Vehicle", b =>
+                {
+                    b.Navigation("DeliverySessions");
+                });
+
+            modelBuilder.Entity("Databases.Entities.VehicleType", b =>
+                {
+                    b.Navigation("Vehicles");
                 });
 #pragma warning restore 612, 618
         }

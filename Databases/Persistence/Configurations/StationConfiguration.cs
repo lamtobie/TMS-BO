@@ -1,4 +1,4 @@
-﻿using Databases.Entities;
+using Databases.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,10 +19,15 @@ namespace Databases.Persistence.Configurations
             builder.Property(e => e.ContactPersonAnother).HasColumnName("contact_person_another");
             builder.Property(e => e.ContactEmailAnother).HasColumnName("contact_email_another");
             builder.Property(e => e.ContactPhoneAnother).HasColumnName("contact_phone_another");
-            builder.Property(e => e.Address).HasColumnName("address");
-            builder.Property(e => e.Lat).HasColumnName("lat");
-            builder.Property(e => e.Long).HasColumnName("long");
+            builder.Property(e => e.AddressId).HasColumnName("address_id");
             builder.Property(e => e.Status).HasDefaultValue("Draft").HasColumnName("status");
+            builder.Property(e => e.CreatedAt).HasColumnName("created_at");
+            builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+            builder.Property(e => e.CreatedBy).HasColumnName("created_by");
+            builder.Property(e => e.UpdatedBy).HasColumnName("updated_by");
+            builder.Ignore(e => e.Key);
+
+            builder.HasOne(e => e.Address).WithMany(e => e.Stations).HasForeignKey(e => e.AddressId);
         }
     }
 }

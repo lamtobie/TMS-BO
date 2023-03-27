@@ -26,6 +26,11 @@ namespace Databases.Persistence.Configurations
             builder.Property(e => e.DriverCode).IsRequired(false).HasColumnName("driver_code");
             builder.Property(e => e.DeliveryRouteId).HasColumnName("delivery_route_id");
             builder.Property(e => e.Status).HasDefaultValue("Draft").HasColumnName("status");
+            builder.Property(e => e.CreatedAt).HasColumnName("created_at");
+            builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+            builder.Property(e => e.CreatedBy).HasColumnName("created_by");
+            builder.Property(e => e.UpdatedBy).HasColumnName("updated_by");
+            builder.Ignore(e => e.Key);
 
             builder.HasOne(e => e.StartStation).WithMany(s => s.StartDeliveryRouteSegments).HasForeignKey(e => e.StartStationId);
             builder.HasOne(e => e.EndStation).WithMany(s => s.EndDeliveryRouteSegments).HasForeignKey(e => e.EndStationId);
