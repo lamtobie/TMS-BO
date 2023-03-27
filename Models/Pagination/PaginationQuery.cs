@@ -16,9 +16,7 @@ public class PaginationQuery
         this.Page = Page;
     }
 
-    [FromQuery(Name = "page_size")]
     public int PageSize { get; set; }
 
-    [FromQuery(Name = "page")]
     public int Page { get; set; }
 }

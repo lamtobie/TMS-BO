@@ -1,5 +1,4 @@
-﻿using Databases;
-
+﻿
 namespace Databases.Entities
 {
     public class Station : AggregateRoot<string>
@@ -12,15 +11,15 @@ namespace Databases.Entities
         public string? ContactPersonAnother { get; set; }
         public string? ContactEmailAnother { get; set; }
         public string? ContactPhoneAnother { get; set; }
-        public string Address { get; set; }
-        public decimal? Lat { get; set; }
-        public decimal? Long { get; set; }
+        public Guid? AddressId { get; set; }
         public string Status { get; set; }
-
+        public virtual Address? Address { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<DeliveryRoute> StartDeliveryRoutes { get; set; }
         public virtual ICollection<DeliveryRoute> EndDeliveryRoutes { get; set; }
         public virtual ICollection<DeliveryRouteSegment> StartDeliveryRouteSegments { get; set; }
         public virtual ICollection<DeliveryRouteSegment> EndDeliveryRouteSegments { get; set; }
+        public virtual ICollection<DeliverySession> StartDeliverySessions { get; set; }
+        public virtual ICollection<DeliverySession> EndDeliverySessions { get; set; }
     }
 }

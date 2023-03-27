@@ -1,6 +1,6 @@
 ﻿using Repositories;
 using Databases.Entities;
-
+using Services.Models.DataAttribute;
 
 namespace Repositories.DataAttributeRepository;
 

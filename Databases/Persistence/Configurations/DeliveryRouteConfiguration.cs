@@ -1,4 +1,5 @@
-﻿using Databases.Entities;
+﻿using Databases;
+using Databases.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -24,6 +25,11 @@ namespace Databases.Persistence.Configurations
             builder.Property(e => e.EndStationId).IsRequired(false).HasColumnName("snd_station_id");
             builder.Property(e => e.DriverCode).IsRequired(false).HasColumnName("driver_code");
             builder.Property(e => e.Status).HasDefaultValue("Draft").HasColumnName("status");
+            builder.Property(e => e.CreatedAt).HasColumnName("created_at");
+            builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+            builder.Property(e => e.CreatedBy).HasColumnName("created_by");
+            builder.Property(e => e.UpdatedBy).HasColumnName("updated_by");
+            builder.Ignore(e => e.Key);
 
             builder.HasOne(e => e.StartStation).WithMany(s => s.StartDeliveryRoutes).HasForeignKey(e => e.StartStationId);
             builder.HasOne(e => e.EndStation).WithMany(s => s.EndDeliveryRoutes).HasForeignKey(e => e.EndStationId);

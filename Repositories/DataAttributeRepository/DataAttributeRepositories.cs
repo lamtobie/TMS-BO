@@ -1,10 +1,9 @@
 ﻿using Databases;
 using Databases.Entities;
+using Services.Models.DataAttribute;
 using Microsoft.EntityFrameworkCore;
-using Repositories;
-using Repositories.DataAttributeRepository;
 
-namespace Eton.TMS.OpBackOffice.Repositories.DataAttributeRepository;
+namespace Repositories.DataAttributeRepository;
 
 public class DataAttributeRepositories : Repository<DataAttribute, Guid>, IDataAttributeRepositories
 {
