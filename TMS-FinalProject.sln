@@ -25,6 +25,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositorie
 		{F75F38D7-51C8-4540-A416-9F807EEE1227} = {F75F38D7-51C8-4540-A416-9F807EEE1227}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{F793BFFF-BCA2-494E-A3FC-550219834DEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapper", "Mapper\Mapper.csproj", "{FE97EB21-823C-42E1-9579-F5AB4C957977}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4543DF2E-BD29-4B1F-AE42-8036C5F695C2} = {4543DF2E-BD29-4B1F-AE42-8036C5F695C2}
+		{6D9211C2-CDE2-4DC4-BA56-1936A76E8181} = {6D9211C2-CDE2-4DC4-BA56-1936A76E8181}
+		{F75F38D7-51C8-4540-A416-9F807EEE1227} = {F75F38D7-51C8-4540-A416-9F807EEE1227}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +60,14 @@ Global
 		{366244B0-99D0-42E6-A043-CB1234C60393}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{366244B0-99D0-42E6-A043-CB1234C60393}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{366244B0-99D0-42E6-A043-CB1234C60393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F793BFFF-BCA2-494E-A3FC-550219834DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F793BFFF-BCA2-494E-A3FC-550219834DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F793BFFF-BCA2-494E-A3FC-550219834DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F793BFFF-BCA2-494E-A3FC-550219834DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE97EB21-823C-42E1-9579-F5AB4C957977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE97EB21-823C-42E1-9579-F5AB4C957977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE97EB21-823C-42E1-9579-F5AB4C957977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE97EB21-823C-42E1-9579-F5AB4C957977}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using Services.Helper.Extensions;
 using Databases.Interfaces;
 
-namespace Eton.TMS.OpBackOffice.Repositories
+namespace Repositories
 {
     public class Repository<T, TKey> : IRepository<T, TKey>
         where T : AggregateRoot<TKey>

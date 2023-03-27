@@ -16,7 +16,7 @@ using Repositories.VehicleRepository;
 using Repositories.VehicleTypeRepository;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Eton.TMS.OpBackOffice.Repositories
+namespace Repositories
 {
     public static class RepositoryExtensions
     {
