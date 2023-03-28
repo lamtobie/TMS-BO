@@ -1,4 +1,5 @@
-﻿using Services.Models.Delivering.DeliveryOrder;
+﻿using Services.Helper.Extensions;
+using Services.Models.Delivering.DeliveryOrder;
 using Services.Models.Delivery.Session;
 
 namespace Services.Models.Delivering.Session;
@@ -49,6 +50,13 @@ public class DeliveringSessionLineDto
 
         return this;
     }
-    
-  
+    public DeliveringSessionLineDto Clone()
+    {
+        var cloned = this.ShallowClone();
+
+        cloned.RandomSessionLineCode();
+
+        return cloned;
+    }
+
 }

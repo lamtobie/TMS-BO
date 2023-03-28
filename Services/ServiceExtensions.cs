@@ -3,7 +3,7 @@ using Services.Implementations;
 using Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Eton.TMS.OpBackOffice.Services
+namespace Services
 {
     public static class ServiceExtensions
     {
