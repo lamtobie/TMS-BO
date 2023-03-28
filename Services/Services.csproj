@@ -13,7 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\Databases\Databases.csproj" />
+    <ProjectReference Include="..\Models\Services.Models.csproj" />
+    <ProjectReference Include="..\Repositories\Repositories.csproj" />
+    <ProjectReference Include="..\Services.Helper\Services.Helper.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Services.Helper.Exceptions
+﻿namespace Exceptions
 {
     public class ValidationException : BaseException
     {

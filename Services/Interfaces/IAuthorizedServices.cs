@@ -1,6 +1,6 @@
 ﻿using Services.Models.Jwt;
 
-namespace Eton.TMS.OpBackOffice.Services.Interfaces;
+namespace Services.Interfaces;
 
 public interface IAuthorizedServices
 {

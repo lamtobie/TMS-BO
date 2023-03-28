@@ -28,5 +28,9 @@ namespace Repositories
         void DeleteRange(List<TEntity> entity);
 
         void Detached(TEntity entity);
+        void MarkDeleted(TEntity entity);
+        void MarkDeletedRange(List<TEntity> entity);
+        void MarkAdded(TEntity entity);
+        void MarkAddedRange(List<TEntity> entity);
     }
 }

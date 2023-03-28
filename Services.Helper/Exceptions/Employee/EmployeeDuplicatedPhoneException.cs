@@ -1,3 +1,5 @@
+using Exceptions;
+
 namespace Services.Helper.Exceptions.Employee;
 
 public class EmployeeDuplicatedPhoneException : ApiException

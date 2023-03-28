@@ -11,4 +11,11 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Databases\Databases.csproj" />
+    <ProjectReference Include="..\Models\Services.Models.csproj" />
+    <ProjectReference Include="..\Repositories\Repositories.csproj" />
+    <ProjectReference Include="..\Services.Helper\Services.Helper.csproj" />
+  </ItemGroup>
+
 </Project>
