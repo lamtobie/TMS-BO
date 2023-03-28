@@ -8,7 +8,7 @@ using Databases.Interfaces;
 namespace Repositories
 {
     public class Repository<T, TKey> : IRepository<T, TKey>
-        where T : AggregateRoot<TKey>
+         where T : AggregateRoot<TKey>
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IDateTimeProvider _dateTimeProvider;
@@ -53,7 +53,7 @@ namespace Repositories
         public void AddRange(List<T> entities)
         {
             var now = _dateTimeProvider.OffsetUtcNow.ToUnixTimeMilliseconds();
-            entities.ForEach(entity => 
+            entities.ForEach(entity =>
             {
                 entity.CreatedAt = now;
                 entity.UpdatedAt = now;
@@ -64,7 +64,7 @@ namespace Repositories
         public async Task AddRangeAsync(List<T> entities)
         {
             var now = _dateTimeProvider.OffsetUtcNow.ToUnixTimeMilliseconds();
-            entities.ForEach(entity => 
+            entities.ForEach(entity =>
             {
                 entity.CreatedAt = now;
                 entity.UpdatedAt = now;
@@ -88,7 +88,7 @@ namespace Repositories
             DbSet.UpdateRange(entities);
         }
 
-        public void Update(T entity, List<Expression<Func<T, object>>> propertyList) 
+        public void Update(T entity, List<Expression<Func<T, object>>> propertyList)
         {
             _dbContext.Attach<T>(entity);
             foreach (Expression<Func<T, object>> property in propertyList)

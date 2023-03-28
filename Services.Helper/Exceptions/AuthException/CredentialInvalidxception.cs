@@ -1,4 +1,4 @@
-
+using Exceptions;
 
 namespace Services.Helper.Exceptions.AuthException
 {
