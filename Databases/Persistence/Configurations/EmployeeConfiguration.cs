@@ -26,6 +26,7 @@ namespace Databases.Persistence.Configurations
             builder.Property(e => e.DrivingLicensePicture).HasColumnName("driving_license_picture");
             builder.Property(e => e.IdentityNumberPicture).HasColumnName("identity_number_picture");
             builder.Property(e => e.Status).HasDefaultValue("Draft").HasColumnName("status");
+            builder.Property(e => e.Services).HasColumnName("services");
             builder.Property(e => e.CreatedAt).HasColumnName("created_at");
             builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
             builder.Property(e => e.CreatedBy).HasColumnName("created_by");
