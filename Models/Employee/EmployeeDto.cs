@@ -25,6 +25,7 @@ public class EmployeeDto : TrackableModel
     public string? DrivingLicensePicture { get; set; }
     public string? IdentityNumberPicture { get; set; }
     public string Status { get; set; } = "Active";
+    public string? Services { get; set; }
     public Guid? AddressId { get; set; }
 
     public AddressDto? Address { get; set; }

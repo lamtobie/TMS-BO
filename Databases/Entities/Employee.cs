@@ -18,6 +18,7 @@ namespace Databases.Entities
         public string? DrivingLicensePicture { get; set; }
         public string? IdentityNumberPicture { get; set; }
         public string Status { get; set; } = "Active";
+        public string? Services { get; set; }
 
         public virtual Address? Address { get; set; }
         public virtual Station Station { get; set; }
