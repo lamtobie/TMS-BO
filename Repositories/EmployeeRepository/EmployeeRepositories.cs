@@ -2,6 +2,7 @@
 using Databases.Entities;
 using Services.Models.Employee;
 using Microsoft.EntityFrameworkCore;
+using Services.Models.DeliveryOrder;
 
 namespace Repositories.EmployeeRepository;
 
@@ -13,7 +14,6 @@ public class EmployeeRepositories : Repository<Employee, string>, IEmployeeRepos
 
     public Employee Create(Employee driver)
     {
-        driver.Code = "C" + Guid.NewGuid().ToString("n").Substring(0, 8);
         Add(driver);
         UnitOfWork.SaveChanges();
         return driver;
@@ -27,6 +27,7 @@ public class EmployeeRepositories : Repository<Employee, string>, IEmployeeRepos
         {
             query = query.Where(q => q.Code.ToLower() == queryData.Keyword.ToLower() ||
                                     q.MobilePhone == queryData.Keyword ||
+                                    q.StationCode == queryData.Keyword ||
                                     q.FullName.ToLower().Contains(queryData.Keyword.ToLower()));
         }
 
@@ -40,7 +41,11 @@ public class EmployeeRepositories : Repository<Employee, string>, IEmployeeRepos
             query = query.Where(q => q.EmployeeType == queryData.EmployeeType);
         }
 
-        //query = queryData.QueryByCreatedAt<Employee>(query);
+        if (queryData.CreatedAt != null && queryData.GetTimeRange<EmployeeQuery>("CreatedAt").Count > 0)
+        {
+            var range = queryData.GetTimeRange<EmployeeQuery>("CreatedAt");
+            query = query.Where(x => x.CreatedAt >= range[0] && x.CreatedAt <= range[1]);
+        }
 
         return query;
     }
@@ -62,7 +67,7 @@ public class EmployeeRepositories : Repository<Employee, string>, IEmployeeRepos
 
     public Employee? GetEmployeeByCode(string code)
     {
-        return GetAll().Include(e => e.Address).FirstOrDefault(e => e.Code == code);
+        return GetAll().Include(e => e.Station).Include(e => e.Address).FirstOrDefault(e => e.Code == code);
     }
 
     public Employee? GetEmployeeByPhone(string phone)

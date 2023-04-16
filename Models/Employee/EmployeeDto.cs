@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Services.Models.Address;
 using Services.Models.Base;
+using Services.Models.Station;
 
 namespace Services.Models.Employee;
 
@@ -25,7 +26,9 @@ public class EmployeeDto : TrackableModel
     public string? DrivingLicensePicture { get; set; }
     public string? IdentityNumberPicture { get; set; }
     public string Status { get; set; } = "Active";
+    public string? Services { get; set; }
     public Guid? AddressId { get; set; }
 
     public AddressDto? Address { get; set; }
+    public StationDto? Station { get; set; }
 }

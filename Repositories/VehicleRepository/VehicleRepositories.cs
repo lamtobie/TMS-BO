@@ -2,6 +2,7 @@
 using Databases.Entities;
 using Services.Models.Vehicle;
 using Microsoft.EntityFrameworkCore;
+using Services.Models.Employee;
 
 namespace Repositories.VehicleRepository;
 
@@ -29,7 +30,11 @@ public class VehicleRepositories : Repository<Vehicle, string>, IVehicleReposito
             query = query.Where(e => e.VehicleTypeCode == queryData.VehicleTypeCode);
         }
 
-        //query = queryData.QueryByCreatedAt<Vehicle>(query);
+        if (queryData.CreatedAt != null && queryData.GetTimeRange<EmployeeQuery>("CreatedAt").Count > 0)
+        {
+            var range = queryData.GetTimeRange<EmployeeQuery>("CreatedAt");
+            query = query.Where(x => x.CreatedAt >= range[0] && x.CreatedAt <= range[1]);
+        }
 
         return query.Include(e => e.VehicleType);
     }

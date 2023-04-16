@@ -6,7 +6,9 @@ namespace Services.Models.Employee;
 public class EmployeeCreationDto
 {
     [Required]
+    public string Code { get; set; }
     public string FullName { get; set; }
+    [Required]
     public string EmployeeType { get; set; }
     [Required]
     public string MobilePhone { get; set; }
@@ -21,6 +23,7 @@ public class EmployeeCreationDto
     public string? DrivingLicensePicture { get; set; }
     public string? IdentityNumberPicture { get; set; }
     public string Status { get; set; } = "Active";
+    public string? Services { get; set; }
     public Guid? AddressId { get; set; }
 
     public AddressDto? Address { get; set; }
