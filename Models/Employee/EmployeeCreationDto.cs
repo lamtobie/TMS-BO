@@ -6,7 +6,9 @@ namespace Services.Models.Employee;
 public class EmployeeCreationDto
 {
     [Required]
+    public string Code { get; set; }
     public string FullName { get; set; }
+    [Required]
     public string EmployeeType { get; set; }
     [Required]
     public string MobilePhone { get; set; }

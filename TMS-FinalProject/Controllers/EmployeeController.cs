@@ -4,6 +4,9 @@ using Services.Models.Base;
 using Services.Models.Employee;
 using Services.Models.Pagination;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Net;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TMS_FinalProject.Controllers
 {
@@ -50,6 +53,29 @@ namespace TMS_FinalProject.Controllers
             return response;
         }
 
+        [HttpPost("UploadAvatar/{code}")]
+        public async Task<int> UploadAvatarPicture(string code)
+        {
+            var files = Request.Form.Files;
+            var result = await _employeeServices.AddAvatarPicture(files,code);
+            return result;
+        }
+        [HttpPost("UploadIdentity/{code}")]
+        public async Task<int> UploadIdentityPicture(string code)
+        {
+            var files = Request.Form.Files;
+            var result = await _employeeServices.AddIdentityPicture(files, code);
+            return result;
+        }
+        [HttpPost("UploadLicense/{code}")]
+        public async Task<int> UploadLicensePicture(string code)
+        {
+            var files = Request.Form.Files;
+            var result = await _employeeServices.AddLicensePicture(files, code);
+            return result;
+        }
+
+
         [HttpDelete("[action]/{employeeCode}")]
         public async Task<BaseModel<Employee>> Delete([FromRoute] string employeeCode)
         {
@@ -71,5 +97,59 @@ namespace TMS_FinalProject.Controllers
             };
             return response;
         }
+
+        [HttpGet("GetAvatarImage/{name}")]
+        public IActionResult GetPhotos(string name)
+        {
+            try
+            {
+                var folderName = Path.Combine("Resources", "Avatar");
+                var pathToRead = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var photos = Directory.EnumerateFiles(pathToRead)
+                    .Where(a => a.Contains(name))
+                    .Select(fullPath => Path.Combine(folderName, Path.GetFileName(fullPath)));
+                return Ok(new { photos });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+
+        [HttpGet("GetIdentityImage/{name}")]
+        public IActionResult GetIdentityPhotos(string name)
+        {
+            try
+            {
+                var folderName = Path.Combine("Resources", "Identity");
+                var pathToRead = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var photos = Directory.EnumerateFiles(pathToRead)
+                    .Where(a => a.Contains(name))
+                    .Select(fullPath => Path.Combine(folderName, Path.GetFileName(fullPath)));
+                return Ok(new { photos });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+        [HttpGet("GetLicenseImage/{name}")]
+        public IActionResult GetLicensePhotos(string name)
+        {
+            try
+            {
+                var folderName = Path.Combine("Resources", "License");
+                var pathToRead = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var photos = Directory.EnumerateFiles(pathToRead)
+                    .Where(a => a.Contains(name))
+                    .Select(fullPath => Path.Combine(folderName, Path.GetFileName(fullPath)));
+                return Ok(new { photos });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+
     }
 }

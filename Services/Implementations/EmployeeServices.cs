@@ -1,6 +1,7 @@
 using AutoMapper;
 using Databases.Entities;
 using Databases.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Repositories.EmployeeRepository;
 using Repositories.StationRepository;
 using Services.Helper.Exceptions.Employee;
@@ -8,6 +9,7 @@ using Services.Helper.Exceptions.Station;
 using Services.Interfaces;
 using Services.Models.Employee;
 using Services.Models.Pagination;
+using System.Reflection.Metadata;
 
 namespace Services.Implementations;
 
@@ -144,5 +146,96 @@ public class EmployeeServices : IEmployeeServices
             throw new EmployeeNotFoundException();
         }
         return _employeeRepositories.DeleteEmployee(code);
+    }
+    public async Task<int> AddAvatarPicture(IFormFileCollection items,string code)
+    {
+        await _unitOfWork.BeginTransactionAsync();
+        var existedEmployee = _employeeRepositories.GetEmployeeByCode(code);
+        if (items.Count > 0)
+        {
+            foreach (var formFile in items)
+            {
+                if (formFile.Length > 0)
+                {
+                    var folder = @"\" + "Resources" + @"\" + "Avatar" + @"\";
+                    var createTime = DateTime.Now.ToString("MMddHHss");
+                    var fileName = folder + createTime + "_" + formFile.FileName;
+                    var fullPath = Environment.CurrentDirectory + fileName;
+                    existedEmployee.AvatarPicture = createTime + "_" + formFile.FileName;
+                    using (var stream = System.IO.File.Create(fullPath))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+            var result = _employeeRepositories.UpdateEmployee(existedEmployee);
+            await _unitOfWork.CommitTransactionAsync();
+            return 1;
+        }
+        else
+        { 
+            return 0; 
+        }
+    }
+    public async Task<int> AddIdentityPicture(IFormFileCollection items, string code)
+    {
+        await _unitOfWork.BeginTransactionAsync();
+        var existedEmployee = _employeeRepositories.GetEmployeeByCode(code);
+        if (items.Count > 0)
+        {
+            foreach (var formFile in items)
+            {
+                if (formFile.Length > 0)
+                {
+                    var folder = @"\" + "Resources" + @"\" + "Identity" + @"\";
+                    var createTime = DateTime.Now.ToString("MMddHHss");
+                    var fileName = folder + createTime + "_" + formFile.FileName;
+                    var fullPath = Environment.CurrentDirectory + fileName;
+                    existedEmployee.IdentityNumberPicture = createTime + "_" + formFile.FileName;
+                    using (var stream = System.IO.File.Create(fullPath))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+            var result = _employeeRepositories.UpdateEmployee(existedEmployee);
+            await _unitOfWork.CommitTransactionAsync();
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public async Task<int> AddLicensePicture(IFormFileCollection items, string code)
+    {
+        await _unitOfWork.BeginTransactionAsync();
+        var existedEmployee = _employeeRepositories.GetEmployeeByCode(code);
+        if (items.Count > 0)
+        {
+            foreach (var formFile in items)
+            {
+                if (formFile.Length > 0)
+                {
+                    var folder = @"\" + "Resources" + @"\" + "License" + @"\";
+                    var createTime = DateTime.Now.ToString("MMddHHss");
+                    var fileName = folder + createTime + "_" + formFile.FileName;
+                    var fullPath = Environment.CurrentDirectory + fileName;
+                    existedEmployee.DrivingLicensePicture = createTime + "_" + formFile.FileName;
+                    using (var stream = System.IO.File.Create(fullPath))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+            var result = _employeeRepositories.UpdateEmployee(existedEmployee);
+            await _unitOfWork.CommitTransactionAsync();
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 }

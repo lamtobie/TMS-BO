@@ -4,6 +4,7 @@ using Repositories.AddressRepository;
 using Services.Interfaces;
 using Services.Models.Address;
 using Services.Models.Pagination;
+using Services.Models.Station;
 
 namespace Services.Implementations;
 
@@ -32,13 +33,6 @@ public class AddressServices : IAddressServices
         return address;
     }
 
-    public async Task<PaginatedResultDto<Address>> GetAll(PaginationQuery query)
-    {
-        var queryable = _addressRepositories.GetAll();
-        var result = _commonServices.CreatePaginationResponse<Address>(queryable, query);
-        return result;
-    }
-
     public Address Update(Guid id, AddressDto addressDto)
     {
         var newAddress = _mapper.Map<AddressDto, Address>(addressDto);
@@ -50,5 +44,12 @@ public class AddressServices : IAddressServices
     public Address Delete(Guid id)
     {
         return _addressRepositories.DeleteAddress(id);
+    }
+
+    public async Task<PaginatedResultDto<Address>> GetAllAddress(AddressQuery query)
+    {
+        var queryable = _addressRepositories.GetAllAddress(query);
+        var result = _commonServices.CreatePaginationResponse<Address>(queryable, query);
+        return result;
     }
 }

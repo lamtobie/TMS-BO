@@ -21,7 +21,7 @@ namespace Databases.Entities
         public string? Services { get; set; }
 
         public virtual Address? Address { get; set; }
-        public virtual Station Station { get; set; }
+        public virtual Station? Station { get; set; }
         public virtual ICollection<DeliveryOrder> DeliveryOrders { get; set; }
         public virtual ICollection<DeliveryRoute> DeliveryRoutes { get; set; }
         public virtual ICollection<DeliveryRouteSegment> DeliveryRouteSegments { get; set; }
