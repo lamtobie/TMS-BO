@@ -1,4 +1,5 @@
 using Databases.Entities;
+using Microsoft.AspNetCore.Http;
 using Services.Models.Employee;
 using Services.Models.Pagination;
 
@@ -11,4 +12,8 @@ public interface IEmployeeServices
     Task<EmployeeDto> Create(EmployeeCreationDto driverCreationDto);
     Employee Delete(string id);
     Task<EmployeeDto> Update(string driverCode, EmployeeDto driver);
+    Task<int> AddAvatarPicture(IFormFileCollection items,string code);
+    Task<int> AddIdentityPicture(IFormFileCollection items, string code);
+    Task<int> AddLicensePicture(IFormFileCollection items, string code);
+
 }
