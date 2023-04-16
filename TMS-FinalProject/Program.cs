@@ -28,7 +28,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddMvc().AddJsonOptions(options =>
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
-builder.Services.AddNpgsql("Server=localhost;Port=5432;Database=tms;Username=postgres;Password=Lam@dct1197;","TMS-FinalProject");
+builder.Services.AddNpgsql("Server=localhost;Port=5432;Database=tms;Username=postgres;Password=123;","TMS-FinalProject");
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
