@@ -7,6 +7,8 @@ namespace Repositories.EmployeeRepository;
 public interface IEmployeeRepositories : IRepository<Employee, string>
 {
     IQueryable<Employee> GetAllEmployees(EmployeeQuery query);
+    IQueryable<Employee> GetAllDrivers(EmployeeQuery query);
+    IQueryable<Employee> GetAllCoordinators(EmployeeQuery query);
     Employee? GetEmployeeByCode(string code);
     Employee Create(Employee driver);
     Employee DeleteEmployee(string code);

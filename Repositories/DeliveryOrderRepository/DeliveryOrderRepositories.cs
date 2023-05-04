@@ -15,9 +15,13 @@ public class DeliveryOrderRepositories : Repository<DeliveryOrder, string>, IDel
 
     public void Create(DeliveryOrder deliverOrder)
     {
-        deliverOrder.Code = "DO" + Guid.NewGuid().ToString("n").Substring(0, 8);
+        deliverOrder.Code = RandomDOCode();
         Add(deliverOrder);
         UnitOfWork.SaveChanges();
+    }
+    private string RandomDOCode()
+    {
+        return "DO" + Guid.NewGuid().ToString("n").Substring(0, 8).ToUpper();
     }
 
     public IQueryable<DeliveryOrder> GetAllDeliveryOrdersForDelivering(DeliveringDOQuery queryData)
@@ -74,6 +78,7 @@ public class DeliveryOrderRepositories : Repository<DeliveryOrder, string>, IDel
     public IQueryable<DeliveryOrder> GetAllDeliveryOrders(DeliveryOrderQuery queryData)
     {
         IQueryable<DeliveryOrder> query = GetAll();
+;
 
         if (queryData.Keyword != null)
         {
@@ -124,16 +129,16 @@ public class DeliveryOrderRepositories : Repository<DeliveryOrder, string>, IDel
         if (queryData.StartStation != null)
         {
             query = query.Where(q => q.StartAddress.Text.Contains(queryData.StartStation) ||
-                                    q.StartContactPerson.Contains(queryData.StartStation) ||
+                                    q.StartStationCode.Contains(queryData.StartStation) ||
                                     q.Childrens.Any(x => x.StartAddress.Text.Contains(queryData.StartStation) ||
                                                         x.StartContactPerson.Contains(queryData.StartStation)));
         }
 
-        if (queryData.ExpectedArrivalTime != null && queryData.GetTimeRange<DeliveryOrderQuery>("ExpectedArrivalTime").Count > 0)
+        if (queryData.ActualArrivalTime != null && queryData.GetTimeRange<DeliveryOrderQuery>("ActualArrivalTime").Count > 0)
         {
-            var range = queryData.GetTimeRange<DeliveryOrderQuery>("ExpectedArrivalTime");
-            query = query.Where(x => (x.ExpectedArrivalTime >= range[0] && x.ExpectedArrivalTime <= range[1]) ||
-                                x.Childrens.Any(y => y.ExpectedArrivalTime >= range[0] && y.ExpectedArrivalTime <= range[1]));
+            var range = queryData.GetTimeRange<DeliveryOrderQuery>("ActualArrivalTime");
+            query = query.Where(x => (x.ActualArrivalTime >= range[0] && x.ActualArrivalTime <= range[1]) ||
+                                x.Childrens.Any(y => y.ActualArrivalTime >= range[0] && y.ActualArrivalTime <= range[1]));
         }
 
         if (queryData.CreatedAt != null && queryData.GetTimeRange<DeliveryOrderQuery>("CreatedAt").Count > 0)
@@ -143,11 +148,11 @@ public class DeliveryOrderRepositories : Repository<DeliveryOrder, string>, IDel
                                 x.Childrens.Any(y => y.CreatedAt >= range[0] && y.CreatedAt <= range[1]));
         }
 
-        if (queryData.ActualTimeConsumed != null && queryData.GetTimeRange<DeliveryOrderQuery>("ActualTimeConsumed").Count > 0)
+        if (queryData.ActualStartTime != null && queryData.GetTimeRange<DeliveryOrderQuery>("ActualStartTime").Count > 0)
         {
-            var range = queryData.GetTimeRange<DeliveryOrderQuery>("ActualTimeConsumed");
-            query = query.Where(x => x.ActualTimeConsumed >= range[0] && x.ActualTimeConsumed <= range[1] ||
-                                x.Childrens.Any(y => y.ActualTimeConsumed >= range[0] && y.ActualTimeConsumed <= range[1]));
+            var range = queryData.GetTimeRange<DeliveryOrderQuery>("ActualStartTime");
+            query = query.Where(x => x.ActualStartTime >= range[0] && x.ActualStartTime <= range[1] ||
+                                x.Childrens.Any(y => y.ActualStartTime >= range[0] && y.ActualStartTime <= range[1]));
         }
 
         return query;
@@ -193,6 +198,7 @@ public class DeliveryOrderRepositories : Repository<DeliveryOrder, string>, IDel
                 .Include(x => x.DeliveryOrderLines).ThenInclude(x => x.DeliveryPackage)
                 .Include(x => x.Childrens).ThenInclude(x => x.DeliveryOrderLines).ThenInclude(x => x.DeliveryPackage)
                 .Include(x => x.StartAddress)
+                .Include(x => x.EndAddress)
                 .Include(x => x.Childrens).ThenInclude(x => x.StartAddress)
                 .Include(x => x.Childrens).ThenInclude(x => x.EndAddress)
                 .FirstOrDefault(e => e.Code == code);

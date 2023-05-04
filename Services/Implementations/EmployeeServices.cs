@@ -93,6 +93,18 @@ public class EmployeeServices : IEmployeeServices
         var result = _commonServices.CreatePaginationResponse<Employee>(queryable, query);
         return result;
     }
+    public async Task<PaginatedResultDto<Employee>> GetDrivers(EmployeeQuery query)
+    {
+        var queryable = _employeeRepositories.GetAllDrivers(query);
+        var result = _commonServices.CreatePaginationResponse<Employee>(queryable, query);
+        return result;
+    }
+    public async Task<PaginatedResultDto<Employee>> GetCoordinators(EmployeeQuery query)
+    {
+        var queryable = _employeeRepositories.GetAllCoordinators(query);
+        var result = _commonServices.CreatePaginationResponse<Employee>(queryable, query);
+        return result;
+    }
 
     public async Task<EmployeeDto> GetOneByCode(string code)
     {

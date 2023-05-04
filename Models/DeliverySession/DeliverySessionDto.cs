@@ -173,6 +173,10 @@ public class DeliverySessionDto : TrackableModel
     public DeliverySessionDto CreateSession(DeliverySessionDto? parent = null, string? groupCode = null)
     {
         RandomSessionCode();
+        if (DriverCode != null)
+        {
+            DriverCode = this.DriverCode;
+        }
 
         if (parent != null)
         {
@@ -230,7 +234,7 @@ public class DeliverySessionDto : TrackableModel
 
     public bool AssignToDriver(EmployeeDto driver)
     {
-        if (driver.EmployeeType == EmployeeTypeEnum.Driver.ToString())
+        if (driver.EmployeeType == "driver")
         {
             DriverCode = driver.Code;
             return true;
@@ -240,9 +244,18 @@ public class DeliverySessionDto : TrackableModel
 
     public bool AssignToVehicle(VehicleDto vehicle)
     {
-        if (vehicle.Status == "Active")
+        if (vehicle.Status == "active")
         {
             VehicleCode = vehicle.Code;
+            return true;
+        }
+        return false;
+    }
+    public bool AssignToStation(StationDto station)
+    {
+        if (station.Status == "active")
+        {
+            EndStationCode = station.Code;
             return true;
         }
         return false;
@@ -271,8 +284,8 @@ public class DeliverySessionDto : TrackableModel
         }
         else if (SessionType == SessionTypeEnum.Pickup.ToString() && Status == SessionStatusEnum.Cancelled.ToString())
         {
-            // doStatus = DeliveryOrderStatusEnum.PickedFailure.ToString();
-            doStatus = DeliveryOrderStatusEnum.New.ToString();
+            doStatus = DeliveryOrderStatusEnum.Cancel.ToString();
+            //doStatus = DeliveryOrderStatusEnum.New.ToString();
         }
         else if (SessionType == SessionTypeEnum.Dropoff.ToString() && Status == SessionStatusEnum.New.ToString())
         {

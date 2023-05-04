@@ -69,16 +69,16 @@ namespace TMS_FinalProject.Controllers
         //     return response;
         // }
 
-        // [HttpPatch("[action]/{deliverySessionCode}")]
-        // public async Task<BaseModel<DeliverySessionDto>> Update([FromBody] DeliverySessionDto deliverySession, [FromRoute] string deliverySessionCode)
-        // {
-        //     var result = await _deliverySessionServices.Update(deliverySessionCode, deliverySession);
-        //     var response = new BaseModel<DeliverySessionDto>()
-        //     {
-        //         Data = result
-        //     };
-        //     return response;
-        // }
+        //[HttpPatch("[action]/{deliverySessionCode}")]
+        //public async Task<BaseModel<DeliverySessionDto>> Update([FromBody] DeliverySessionDto deliverySession, [FromRoute] string deliverySessionCode)
+        //{
+        //    var result = await _deliverySessionServices.Update(deliverySessionCode, deliverySession);
+        //    var response = new BaseModel<DeliverySessionDto>()
+        //    {
+        //        Data = result
+        //    };
+        //    return response;
+        //}
 
         [HttpPatch("[action]/{deliverySessionCode}")]
         public async Task<BaseModel<DeliverySessionDto>> UpdateSessionLines([FromRoute] string deliverySessionCode, [FromBody] DeliverySessionDto deliverySession)

@@ -16,6 +16,8 @@ using Services.Models.Employee;
 using Services.Models.Pagination;
 using Microsoft.EntityFrameworkCore;
 using Databases.Interfaces;
+using Services.Helper.Exceptions.Station;
+using Services.Models.Station;
 
 namespace Services.Implementations;
 
@@ -56,7 +58,19 @@ public class DeliveryOrderServices : IDeliveryOrderServices
     {
         return "DO" + Guid.NewGuid().ToString("n").Substring(0, 8).ToUpper();
     }
+    public async Task<DeliveryOrderDto> CreateDO(DeliveryOrderDto orderCreationDto)
+    {
+        var existedOrder = _deliveryOrderRepositories.GetDeliveryOrderByCode(orderCreationDto.Code);
+        if (existedOrder != null)
+        {
+            throw new DeliveryOrderDuplicatedCodeException();
+        }
+        var order = _mapper.Map<DeliveryOrderDto, DeliveryOrder>(orderCreationDto);
+        _deliveryOrderRepositories.Create(order);
 
+        var orderDto = _mapper.Map<DeliveryOrder, DeliveryOrderDto>(order);
+        return orderDto;
+    }
     public async Task<PaginatedResultDto<DeliveryOrder>> GetAll(DeliveryOrderQuery query)
     {
         var queryable = _deliveryOrderRepositories.GetAllDeliveryOrders(query);
@@ -83,42 +97,38 @@ public class DeliveryOrderServices : IDeliveryOrderServices
                             ReferenceCode = x.Childrens.Count > 0
                                             ? String.Join(", ", x.Childrens.Select(c => c.ReferenceCode).ToList())
                                             : x.ReferenceCode,
-                            TotalItems = x.Childrens.Sum(c => c.TotalItems),
+                            TotalItems = x.Childrens.Count > 0 ? x.Childrens.Sum(c => c.TotalItems) : x.TotalItems,
                             Status = x.Status,
                             StartAddress = _mapper.Map<Address, AddressDto>(x.StartAddress),
+                            EndAddress = _mapper.Map<Address, AddressDto>(x.Childrens.First().EndAddress),
+                            EndContactPerson = x.Childrens.Count > 0
+                                            ? String.Join(", ", x.Childrens.Select(c => c.EndContactPerson).ToList()): x.EndContactPerson,
+                            EndContactPhone = x.Childrens.Count > 0
+                                            ? String.Join(", ", x.Childrens.Select(c => c.EndContactPhone).ToList()) : x.EndContactPhone,
+                            EndStationCode = x.EndStationCode,
+                            StartContactPerson = x.StartContactPerson,
+                            StartContactPhone = x.StartContactPhone,
+                            ExpectedStartTime = x.ExpectedStartTime,
+                            ExpectedTimeConsumed= x.Childrens.Count == 1 ? x.Childrens.First().ExpectedTimeConsumed :x.ExpectedTimeConsumed,
+                            ExpectedArrivalTime = x.Childrens.Count == 1 ? x.Childrens.First().ExpectedArrivalTime : x.ExpectedArrivalTime,
+                            EndNote = x.Childrens.Count == 1 ? x.Childrens.First().EndNote : x.EndNote,
+                            StartNote = x.StartNote,
                             ThreePLTeam = x.Childrens.Count == 1 ? x.Childrens.First().ThreePLTeam : x.ThreePLTeam,
                             CodAmount = x.Childrens.Count > 0 ? x.Childrens.Sum(x => x.CodAmount) : x.CodAmount,
                             DriverCode = x.DriverCode,
-                            Driver = _mapper.Map<Employee, EmployeeDto>(x.Session.Driver),
+                            Driver = _mapper.Map<Employee, EmployeeDto>(x.Driver),
                             CoordinatorCode = x.CoordinatorCode,
-                            Coordinator = _mapper.Map<Employee, EmployeeDto>(x.Session.Coordinator),
+                            Coordinator = _mapper.Map<Employee, EmployeeDto>(x.Coordinator),
                             SessionCode = x.SessionCode,
                             GroupCode = x.GroupCode,
                             NumberOfTransit = x.Childrens.Count(c => c.IsToCustomer == null || c.IsToCustomer == false),
                             SourceBy = x.SourceBy,
                             CreatedAt = x.CreatedAt,
                             ActualTimeConsumed = x.ActualTimeConsumed,
-                            Children = x.Childrens.Count == 1 || x.Childrens.Count == 0 ? null : x.Childrens.Select(c => new DeliveryOrderTreeResultDto()
-                            {
-                                Code = c.Code,
-                                ParentCode = c.ParentCode,
-                                ReferenceCode = c.ReferenceCode,
-                                TotalItems = c.TotalItems,
-                                Status = c.Status,
-                                StartAddress = _mapper.Map<Address, AddressDto>(c.StartAddress),
-                                ThreePLTeam = c.ThreePLTeam,
-                                CodAmount = c.CodAmount,
-                                DriverCode = c.DriverCode,
-                                Driver = _mapper.Map<Employee, EmployeeDto>(c.Driver),
-                                CoordinatorCode = c.CoordinatorCode,
-                                Coordinator = _mapper.Map<Employee, EmployeeDto>(c.Coordinator),
-                                SessionCode = c.SessionCode,
-                                GroupCode = c.GroupCode,
-                                NumberOfTransit = c.Childrens.Count(cc => cc.IsToCustomer == null || cc.IsToCustomer == false),
-                                SourceBy = c.SourceBy,
-                                CreatedAt = c.CreatedAt,
-                                ActualTimeConsumed = c.ActualTimeConsumed
-                            }).ToList()
+                            ActualStartTime = x.ActualStartTime,
+                            ActualArrivalTime = x.ActualArrivalTime,
+                            StartStationCode = x.StartStationCode,
+                            Childrens = x.Childrens,
                         })
                         .AsQueryable();
         var result = _commonServices.CreatePaginationResponse<DeliveryOrderTreeResultDto>(queryableResult, query);
@@ -160,7 +170,7 @@ public class DeliveryOrderServices : IDeliveryOrderServices
 
             dropoffDO.Code = RandomDOCode();
             dropoffDO.ParentCode = parentDODto.Code;
-
+           
             dropoffDO.StartAddress = parentDODto.StartAddress;
             dropoffDO.StartContactPerson = parentDODto.StartContactPerson;
             dropoffDO.StartContactPhone = parentDODto.StartContactPhone;
@@ -368,6 +378,7 @@ public class DeliveryOrderServices : IDeliveryOrderServices
             deliveryOrder.StartNote = data.StartNote;
             deliveryOrder.StartStationCode = data.StartStationCode;
             deliveryOrder.ExpectedStartTime = data.ExpectedStartTime;
+            deliveryOrder.Status = data.Status;
         }
 
         // Update dropoff orders
@@ -412,6 +423,7 @@ public class DeliveryOrderServices : IDeliveryOrderServices
         {
 
         }
+        _deliveryOrderRepositories.Update(deliveryOrder);
 
         await _unitOfWork.SaveChangesAsync();
 
@@ -428,6 +440,10 @@ public class DeliveryOrderServices : IDeliveryOrderServices
         dosDto.ForEach(doDto =>
         {
             doDto.AssignToSession(sessionDto);
+            doDto.DriverCode = sessionDto.DriverCode;
+            doDto.CoordinatorCode = sessionDto.CoordinatorCode;
+            doDto.EndStationCode = sessionDto.EndStationCode;
+            doDto.StartStationCode= sessionDto.StartStationCode;
             var doStatus = sessionDto.ComputeDOStatus();
             if (!string.IsNullOrEmpty(doStatus))
             {

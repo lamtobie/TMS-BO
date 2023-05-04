@@ -4,11 +4,11 @@ namespace Services.Helper.Enums;
 
 public enum EmployeeTypeEnum
 {
-    [Description("Driver")]
+    [Description("driver")]
     Driver,
-    [Description("Coordinator")]
+    [Description("coordinator")]
     Coordinator,
-    [Description("StationManager")]
+    [Description("stationmanager")]
     StationManager,
     [Description("ClientOperationAdmin")]
     ClientOperationAdmin,

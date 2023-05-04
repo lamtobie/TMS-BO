@@ -8,6 +8,8 @@ namespace Services.Interfaces;
 public interface IEmployeeServices
 {
     Task<PaginatedResultDto<Employee>> GetAll(EmployeeQuery query);
+    Task<PaginatedResultDto<Employee>> GetDrivers(EmployeeQuery query);
+    Task<PaginatedResultDto<Employee>> GetCoordinators(EmployeeQuery query);
     Task<EmployeeDto> GetOneByCode(string code);
     Task<EmployeeDto> Create(EmployeeCreationDto driverCreationDto);
     Employee Delete(string id);
