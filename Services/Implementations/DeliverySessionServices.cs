@@ -25,6 +25,7 @@ using Microsoft.EntityFrameworkCore;
 using Services.Models.DeliveryOrder;
 using Databases.Interfaces;
 using Services.Helper.Extensions;
+using Services.Helper.Exceptions.Station;
 
 namespace Services.Implementations;
 
@@ -403,18 +404,24 @@ public class DeliverySessionServices : IDeliverySessionServices
         }
 
         var driver = _employeeRepositories.GetEmployeeByCode(data.DriverCode);
-        if (driver == null || driver.EmployeeType != EmployeeTypeEnum.Driver.ToString())
+        if (driver == null || driver.EmployeeType.Equals("driver")==false)
         {
             throw new EmployeeNotFoundException();
         }
         var driverDto = _mapper.Map<Employee, EmployeeDto>(driver);
 
         var vehicle = _vehicleRepositories.GetVehicleByCode(data.VehicleCode);
-        if (vehicle == null || driver.Status != "Active")
+        if (vehicle == null || driver.Status != "active")
         {
             throw new VehicleNotFoundException();
         }
         var vehicleDto = _mapper.Map<Vehicle, VehicleDto>(vehicle);
+        var station = _stationRepositories.GetStationByCode(data.StationCode);
+        if (station == null || station.Status != "active")
+        {
+            throw new StationNotFoundException();
+        }
+        var stationDto = _mapper.Map<Station, StationDto>(station);
 
         await _unitOfWork.BeginTransactionAsync();
 
@@ -425,6 +432,8 @@ public class DeliverySessionServices : IDeliverySessionServices
         deliverySessionDto.CreateSession(null, null);
         deliverySessionDto.AssignToDriver(driverDto);
         deliverySessionDto.AssignToVehicle(vehicleDto);
+        deliverySessionDto.AssignToStation(stationDto);
+
         var deliverySession = _mapper.Map<DeliverySessionDto, DeliverySession>(deliverySessionDto);
         _deliverySessionRepositories.Add(deliverySession);
         _deliveryOrderServices.UpdateDOBySession(deliverySessionDto);

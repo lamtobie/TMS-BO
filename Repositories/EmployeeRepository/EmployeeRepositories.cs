@@ -49,6 +49,67 @@ public class EmployeeRepositories : Repository<Employee, string>, IEmployeeRepos
 
         return query;
     }
+    public IQueryable<Employee> GetAllDrivers(EmployeeQuery queryData)
+    {
+        IQueryable<Employee> query = GetAll().Where(q => q.EmployeeType.Equals("driver"));
+
+        if (queryData.Keyword != null)
+        {
+            query = query.Where(q => q.Code.ToLower() == queryData.Keyword.ToLower() ||
+                                    q.MobilePhone == queryData.Keyword ||
+                                    q.StationCode == queryData.Keyword ||
+                                    q.FullName.ToLower().Contains(queryData.Keyword.ToLower()));
+        }
+
+        if (queryData.Status != null)
+        {
+            query = query.Where(q => q.Status == queryData.Status);
+        }
+
+        if (queryData.EmployeeType != null)
+        {
+            query = query.Where(q => q.EmployeeType == queryData.EmployeeType);
+        }
+
+        if (queryData.CreatedAt != null && queryData.GetTimeRange<EmployeeQuery>("CreatedAt").Count > 0)
+        {
+            var range = queryData.GetTimeRange<EmployeeQuery>("CreatedAt");
+            query = query.Where(x => x.CreatedAt >= range[0] && x.CreatedAt <= range[1]);
+        }
+
+        return query;
+    }
+
+    public IQueryable<Employee> GetAllCoordinators(EmployeeQuery queryData)
+    {
+        IQueryable<Employee> query = GetAll().Where(q => q.EmployeeType.Equals("coordinator"));
+
+        if (queryData.Keyword != null)
+        {
+            query = query.Where(q => q.Code.ToLower() == queryData.Keyword.ToLower() ||
+                                    q.MobilePhone == queryData.Keyword ||
+                                    q.StationCode == queryData.Keyword ||
+                                    q.FullName.ToLower().Contains(queryData.Keyword.ToLower()));
+        }
+
+        if (queryData.Status != null)
+        {
+            query = query.Where(q => q.Status == queryData.Status);
+        }
+
+        if (queryData.EmployeeType != null)
+        {
+            query = query.Where(q => q.EmployeeType == queryData.EmployeeType);
+        }
+
+        if (queryData.CreatedAt != null && queryData.GetTimeRange<EmployeeQuery>("CreatedAt").Count > 0)
+        {
+            var range = queryData.GetTimeRange<EmployeeQuery>("CreatedAt");
+            query = query.Where(x => x.CreatedAt >= range[0] && x.CreatedAt <= range[1]);
+        }
+
+        return query;
+    }
 
     public Employee DeleteEmployee(string code)
     {

@@ -31,6 +31,19 @@ namespace TMS_FinalProject.Controllers
             return result;
         }
 
+        [HttpGet("GetDrivers")]
+        public async Task<PaginatedResultDto<Employee>> GetDrivers([FromQuery] EmployeeQuery query)
+        {
+            var result = await _employeeServices.GetDrivers(query);
+            return result;
+        }
+        [HttpGet("GetCoordinators")]
+        public async Task<PaginatedResultDto<Employee>> GetCoordinators([FromQuery] EmployeeQuery query)
+        {
+            var result = await _employeeServices.GetCoordinators(query);
+            return result;
+        }
+
         [HttpGet("[action]/{employeeCode}")]
         public async Task<BaseModel<EmployeeDto>> GetOne([FromRoute] string employeeCode)
         {

@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Databases\Databases.csproj" />
     <ProjectReference Include="..\Services.Helper\Services.Helper.csproj" />
   </ItemGroup>
 
