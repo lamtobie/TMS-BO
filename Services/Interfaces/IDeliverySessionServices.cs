@@ -13,6 +13,7 @@ public interface IDeliverySessionServices
     Task<DeliverySessionDto> UpdateSessionLines(string deliverySessionCode, DeliverySessionDto deliverySessionDto);
     Task<DeliverySessionDto> HandedOver(string deliverySessionCode, DeliverySessionConfirmDto data);
     Task<DeliverySessionDto> Cancel(string deliverySessionCode, DeliverySessionConfirmDto data);
+    Task<DeliverySessionDto> Returned(string deliverySessionCode, DeliverySessionConfirmDto data);
     Task<DeliverySessionDto> AssignDriverToDOs(AssignDriverDto data);
     Task<List<DeliverySession>> CreateDropOffSession(DeliverySession sessionPickup);
 }
