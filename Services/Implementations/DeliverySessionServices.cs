@@ -383,6 +383,29 @@ public class DeliverySessionServices : IDeliverySessionServices
 
         return sessionDto;
     }
+    public async Task<DeliverySessionDto> Returned(string deliverySessionCode, DeliverySessionConfirmDto data)
+    {
+        var session = GetDeliverySessionByCode(deliverySessionCode);
+
+        if (session.Status != SessionStatusEnum.New.ToString() && session.Status != SessionStatusEnum.AConfirmed.ToString())
+        {
+            throw new DeliverySessionInvalidStatusToSwitchException();
+        }
+
+        await _unitOfWork.BeginTransactionAsync();
+
+        var sessionDto = _mapper.Map<DeliverySession, DeliverySessionDto>(session);
+        sessionDto.Returned(data.Note);
+        session = _mapper.Map<DeliverySessionDto, DeliverySession>(sessionDto);
+        _deliverySessionRepositories.Update(session);
+        _deliveryOrderServices.UpdateDOBySession(sessionDto);
+
+        await _unitOfWork.SaveChangesAsync();
+
+        await _unitOfWork.CommitTransactionAsync();
+
+        return sessionDto;
+    }
 
     public async Task<DeliverySessionDto> AssignDriverToDOs(AssignDriverDto data)
     {

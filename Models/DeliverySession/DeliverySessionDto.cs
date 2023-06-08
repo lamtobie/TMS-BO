@@ -231,6 +231,14 @@ public class DeliverySessionDto : TrackableModel
 
         return this;
     }
+    public DeliverySessionDto Returned(string? note)
+    {
+        Note = note;
+        Status = SessionStatusEnum.HandOverFailed.ToString();
+        SessionType = SessionTypeEnum.Refund.ToString();
+        return this;
+    }
+
 
     public bool AssignToDriver(EmployeeDto driver)
     {
@@ -277,6 +285,15 @@ public class DeliverySessionDto : TrackableModel
         else if (SessionType == SessionTypeEnum.Pickup.ToString() && Status == SessionStatusEnum.HandedOver.ToString())
         {
             doStatus = DeliveryOrderStatusEnum.Picking.ToString();
+        }
+        else if (SessionType == SessionTypeEnum.Refund.ToString() && Status == SessionStatusEnum.HandOverFailed.ToString())
+        {
+            if (doStatus.Equals(DeliveryOrderStatusEnum.DeliveredFailureAndReturning.ToString()))
+                doStatus = DeliveryOrderStatusEnum.DeliveredFailureAndReturned.ToString();
+            if (doStatus.Equals(DeliveryOrderStatusEnum.DeliveryDelay.ToString()))
+                doStatus=DeliveryOrderStatusEnum.DeliveryDelayAndReturned.ToString();
+            if (doStatus.Equals(DeliveryOrderStatusEnum.DeliveryDelayAndReturning.ToString()))
+                doStatus = DeliveryOrderStatusEnum.DeliveryDelayAndReturned.ToString();
         }
         else if (SessionType == SessionTypeEnum.Pickup.ToString() && Status == SessionStatusEnum.Confirmed.ToString())
         {

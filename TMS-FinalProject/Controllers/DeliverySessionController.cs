@@ -146,6 +146,16 @@ namespace TMS_FinalProject.Controllers
             return response;
         }
 
+        [HttpPost("[action]/{deliverySessionCode}")]
+        public async Task<BaseModel<DeliverySessionDto>> Returned([FromRoute] string deliverySessionCode, [FromBody] DeliverySessionConfirmDto data)
+        {
+            var result = await _deliverySessionServices.Returned(deliverySessionCode, data);
+            var response = new BaseModel<DeliverySessionDto>()
+            {
+                Data = result
+            };
+            return response;
+        }
         // [HttpGet("[action]/{deliverySessionCode}")]
         // public async Task<BaseModel<DeliverySessionDto>> GetHistory([FromRoute] string deliverySessionCode)
         // {
